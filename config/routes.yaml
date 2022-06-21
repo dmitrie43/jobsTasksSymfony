@@ -1,0 +1,24 @@
+index:
+  path: /
+  controller: App\Controller\DefaultController::index
+
+auth:
+  path: /auth
+  controller: App\Controller\User\AuthController::index
+
+registration:
+  path: /registration
+  controller: App\Controller\User\RegistrationController::index
+
+registration_create_user:
+  path: /registration/create
+  controller: App\Controller\User\RegistrationController::createUser
+  methods: POST
+
+personal_account:
+  path: /lk
+  controller: App\Controller\User\PersonalAccountController::index
+  methods: GET
+  condition:  "context.getMethod() in ['GET', 'HEAD']"
+
+
