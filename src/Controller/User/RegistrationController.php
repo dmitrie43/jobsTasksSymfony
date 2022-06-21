@@ -7,6 +7,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * Class RegistrationController
@@ -27,9 +28,10 @@ class RegistrationController extends AbstractController
     /**
      * @param ManagerRegistry $doctrine
      * @param Request $request
+     * @param UserPasswordHasherInterface $passwordHasher
      * @return Response
      */
-    public function createUser(ManagerRegistry $doctrine, Request $request): Response
+    public function createUser(ManagerRegistry $doctrine, Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $fields = ['name', 'email', 'password'];
         $errors = [];
@@ -45,12 +47,11 @@ class RegistrationController extends AbstractController
         $user = new User();
         $user->setName($request->get('name'));
         $user->setEmail($request->get('email'));
-        $user->setPassword($request->get('password'));
 
         $entityManager->persist($user);
         $entityManager->flush();
 
-        return new Response();
+        return $this->redirectToRoute('registration');
     }
 
 }
