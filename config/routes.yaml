@@ -25,6 +25,11 @@ profile:
   methods: GET
   condition:  "context.getMethod() in ['GET', 'HEAD']"
 
+profile_update:
+  path: /profile/update
+  controller: App\Controller\User\PersonalAccountController::updateProfile
+  methods: POST
+
 tasks:
   path: /tasks
   controller: App\Controller\Task\TaskController::index
