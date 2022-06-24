@@ -52,7 +52,7 @@ class RegistrationController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 
-        return $this->redirectToRoute('registration');
+        return $this->redirectToRoute('auth');
     }
 
 }
