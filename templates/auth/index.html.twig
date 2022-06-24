@@ -2,14 +2,28 @@
 
 {% block title %} Authorization {% endblock %}
 
-{% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
+{% block content %}
 
-    <div class="example-wrapper">
-
+    <div class="section-divider"></div>
+    <div class="container" style="min-height: 72vh;">
+        <h2>Login form</h2>
+        {% if error %}
+            <span class="alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+        {% endif %}
+        <form action="{{ path('auth') }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <label for="email">Email</label>
+            <p>
+                <input type="text" id="email" name="_username" value="{{ last_email }}"/>
+            </p>
+            <label for="password">Password:</label>
+            <p>
+                <input type="password" id="password" name="_password"/>
+            </p>
+            {# If you want to control the URL the user is redirected to on success
+            <input type="hidden" name="_target_path" value="/account"/> #}
+            <button type="submit">login</button>
+        </form>
     </div>
 
 {% endblock %}

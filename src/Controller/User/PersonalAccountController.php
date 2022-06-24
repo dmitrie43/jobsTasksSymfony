@@ -14,13 +14,12 @@ class PersonalAccountController extends AbstractController
 {
     /**
      * Страница личного кабинета
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request): Response
+    public function index(): Response
     {
         return $this->render(
-            "personal_account/index.html.twig", []
+            "profile/index.html.twig", []
         );
     }
 }

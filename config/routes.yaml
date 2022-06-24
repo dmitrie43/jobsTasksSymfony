@@ -6,6 +6,10 @@ auth:
   path: /auth
   controller: App\Controller\User\AuthController::index
 
+logout:
+  path: /logout
+  methods: GET
+
 registration:
   path: /registration
   controller: App\Controller\User\RegistrationController::index
@@ -15,8 +19,8 @@ registration_create_user:
   controller: App\Controller\User\RegistrationController::createUser
   methods: POST
 
-personal_account:
-  path: /lk
+profile:
+  path: /profile
   controller: App\Controller\User\PersonalAccountController::index
   methods: GET
   condition:  "context.getMethod() in ['GET', 'HEAD']"

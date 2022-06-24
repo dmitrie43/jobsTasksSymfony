@@ -2,36 +2,34 @@
 
 {% block title %} Registration {% endblock %}
 
-{% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
+{% block content %}
 
-    <div class="example-wrapper">
+    <div class="section-divider"></div>
+    <div class="container" style="min-height: 72vh;">
+        <h2>Registration form</h2>
         <form action="{{ path('registration_create_user') }}" method="POST">
-            <label for="name">
-                Name <input id="name" type="text" name="name">
+            <label for="name">Name</label>
+            <p>
+                <input id="name" type="text" name="name">
                 {% if errors['name'] is defined %}
-                    {{ errors['name'] }}
+                    <span class="alert-danger">{{ errors['name'] }}</span>
                 {% endif %}
-            </label>
-            <br>
-            <label for="email">
-                Email <input id="email" type="email" name="email">
+            </p>
+            <label for="email">Email</label>
+            <p>
+                <input id="email" type="email" name="email">
                 {% if errors['email'] is defined %}
-                    {{ errors['email'] }}
+                    <span class="alert-danger">{{ errors['email'] }}</span>
                 {% endif %}
-            </label>
-            <br>
-            <label for="password">
-                Password <input id="password" type="password" name="password">
+            </p>
+            <label for="password">Password</label>
+            <p>
+                <input id="password" type="password" name="password">
                 {% if errors['password'] is defined %}
-                    {{ errors['password'] }}
+                    <span class="alert-danger">{{ errors['password'] }}</span>
                 {% endif %}
-            </label>
-            <br>
-            <input type="submit" value="Registration">
+            </p>
+            <button type="submit">Registration</button>
         </form>
     </div>
 
