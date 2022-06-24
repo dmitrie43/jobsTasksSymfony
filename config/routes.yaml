@@ -25,4 +25,7 @@ profile:
   methods: GET
   condition:  "context.getMethod() in ['GET', 'HEAD']"
 
-
+tasks:
+  path: /tasks
+  controller: App\Controller\Task\TaskController::index
+  methods: GET
