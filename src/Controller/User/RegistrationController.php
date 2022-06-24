@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,12 +27,12 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @param ManagerRegistry $doctrine
+     * @param UserRepository $userRepository
      * @param Request $request
      * @param UserPasswordHasherInterface $passwordHasher
      * @return Response
      */
-    public function createUser(ManagerRegistry $doctrine, Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    public function createUser(UserRepository $userRepository, Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $fields = ['name', 'email', 'password'];
         $errors = [];
@@ -42,15 +43,12 @@ class RegistrationController extends AbstractController
         if (!empty($errors))
             return $this->redirectToRoute('registration', ['errors' => $errors]);
 
-        $entityManager = $doctrine->getManager();
-
         $user = new User();
         $user->setName($request->get('name'));
         $user->setEmail($request->get('email'));
         $user->setPassword($passwordHasher->hashPassword($user, $request->get('password')));
 
-        $entityManager->persist($user);
-        $entityManager->flush();
+        $userRepository->add($user, true);
 
         return $this->redirectToRoute('auth');
     }

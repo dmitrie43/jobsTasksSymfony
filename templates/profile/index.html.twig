@@ -7,6 +7,34 @@
     <div class="section-divider"></div>
     <div class="container" style="min-height: 72vh;">
         <h2>Profile</h2>
+        {% for message in app.session.getFlashBag().get('success', []) %}
+            <span class="alert-success">{{ message }}</span>
+        {% endfor %}
+        <form action="{{ path('profile_update') }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('profile_update') }}">
+            <label for="name">Name</label>
+            <p>
+                <input type="text" id="name" name="name" value="{{ user.name }}"/>
+                {% if errors['name'] is defined %}
+                    <span class="alert-danger">{{ errors['name'] }}</span>
+                {% endif %}
+            </p>
+            <label for="email">Email</label>
+            <p>
+                <input type="text" id="email" name="email" value="{{ user.email }}"/>
+                {% if errors['email'] is defined %}
+                    <span class="alert-danger">{{ errors['email'] }}</span>
+                {% endif %}
+            </p>
+            <label for="password">Password</label>
+            <p>
+                <input type="password" id="password" name="password"/>
+                {% if errors['password'] is defined %}
+                    <span class="alert-danger">{{ errors['password'] }}</span>
+                {% endif %}
+            </p>
+            <button type="submit">update</button>
+        </form>
     </div>
 
 {% endblock %}
