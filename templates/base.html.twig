@@ -16,9 +16,13 @@
 <body>
 <ul>
     <li><a href="{{ path('index') }}">Main</a></li>
-    <li><a href="{{ path('auth') }}">Auth</a></li>
-    <li><a href="{{ path('registration') }}">Registration</a></li>
-    <li><a href="{{ path('personal_account') }}">LK</a></li>
+    {% if (app.user) %}
+        <li><a href="{{ path('profile') }}">Profile</a></li>
+        <li><a href="{{ path('logout') }}">Logout</a></li>
+    {% else %}
+        <li><a href="{{ path('auth') }}">Auth</a></li>
+        <li><a href="{{ path('registration') }}">Registration</a></li>
+    {% endif %}
 </ul>
 {% block body %}
 {% endblock %}

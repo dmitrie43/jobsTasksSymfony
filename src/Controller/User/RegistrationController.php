@@ -22,7 +22,7 @@ class RegistrationController extends AbstractController
     public function index(Request $request): Response
     {
         $errors = $request->get('errors');
-        return $this->renderForm('registration/index.html.twig', compact('errors'));
+        return $this->render('registration/index.html.twig', compact('errors'));
     }
 
     /**
