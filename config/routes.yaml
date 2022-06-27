@@ -41,6 +41,6 @@ task_new:
   methods: GET
 
 task_create:
-  path: /task/new/create
+  path: /tasks/new/create
   controller: App\Controller\Task\TaskController::createTask
   methods: POST
