@@ -49,7 +49,7 @@ class PersonalAccountController extends AbstractController
         if (!empty($errors))
             return $this->redirectToRoute('profile', ['errors' => $errors]);
 
-        $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $user = $userRepository->find($this->getUser()->getId());
         $user->setName($request->get('name'));
         $user->setEmail($request->get('email'));
         $user->setPassword($passwordHasher->hashPassword($user, $request->get('password')));
