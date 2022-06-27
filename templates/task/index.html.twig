@@ -5,8 +5,38 @@
 {% block content %}
 
     <div class="section-divider"></div>
-    <div class="container" style="min-height: 72vh;">
+    <div class="container" style="min-height: 72vh; margin-bottom: 100px;">
         <h2>My Tasks</h2>
+        <h3><a href="{{ path('task_new') }}">Create new</a></h3>
+        {% if tasks %}
+            <style>
+                table {
+                    font-size: 18px;
+                }
+                th, td {
+                    border: 1px solid black;
+                    padding: 10px;
+                }
+            </style>
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Date to expiration</th>
+                    <th>Description</th>
+                </tr>
+                {% for elem in tasks %}
+                    <tr>
+                        <td>{{ elem.title }}</td>
+                        <td>{{ elem.getDateExpiration().format('d-m-Y H:i:s') }}</td>
+                        <td>{{ elem.description }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <h3>
+                There are no tasks :(
+            </h3>
+        {% endif %}
     </div>
 
 {% endblock %}
