@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} My tasks {% endblock %}
+
+{% block content %}
+
+    <div class="section-divider"></div>
+    <div class="container" style="min-height: 72vh;">
+        <h2>Creating task</h2>
+        {% for message in app.session.getFlashBag().get('success', []) %}
+            <span class="alert-success">{{ message }}</span>
+        {% endfor %}
+        <form action="{{ path('task_create') }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('task_create') }}">
+            <label for="title">Title</label>
+            <p>
+                <input type="text" id="title" name="title" value=""/>
+                {% if errors['title'] is defined %}
+                    <span class="alert-danger">{{ errors['title'] }}</span>
+                {% endif %}
+            </p>
+            <label for="date_to_expiration">Date to expiration</label>
+            <p>
+                <input type="datetime-local" id="date_to_expiration" name="date_to_expiration" value=""/>
+                {% if errors['date_to_expiration'] is defined %}
+                    <span class="alert-danger">{{ errors['date_to_expiration'] }}</span>
+                {% endif %}
+            </p>
+            <label for="description">Description</label>
+            <p>
+                <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                {% if errors['description'] is defined %}
+                    <span class="alert-danger">{{ errors['description'] }}</span>
+                {% endif %}
+            </p>
+            <button type="submit">create</button>
+        </form>
+    </div>
+
+{% endblock %}

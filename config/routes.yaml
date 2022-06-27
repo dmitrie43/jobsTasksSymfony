@@ -34,3 +34,13 @@ tasks:
   path: /tasks
   controller: App\Controller\Task\TaskController::index
   methods: GET
+
+task_new:
+  path: /tasks/new
+  controller: App\Controller\Task\TaskController::newTask
+  methods: GET
+
+task_create:
+  path: /task/new/create
+  controller: App\Controller\Task\TaskController::createTask
+  methods: POST
